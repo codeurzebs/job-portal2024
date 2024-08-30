@@ -1,17 +1,12 @@
 <?php
 session_start();
-
-if(isset($_SESSION['id_user']) || isset($_SESSION['id_company'])) { 
-  header("Location: index.php");
-  exit();
-}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Job Portal</title>
+  <title>Job Portal | Réinitialiser le mot de passe</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -42,73 +37,34 @@ if(isset($_SESSION['id_user']) || isset($_SESSION['id_company'])) {
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Candidates Login</p>
+    <p class="login-box-msg">Réinitialiser le mot de passe</p>
 
-    <form method="post" action="checklogin.php">
+    <form action="update-password.php" method="post">
+      <input type="hidden" name="token" value="<?php echo $_GET['token']; ?>">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <input type="password" name="password" class="form-control" placeholder="Nouveau mot de passe" required>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        <input type="password" name="confirm_password" class="form-control" placeholder="Confirmer le mot de passe" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
-        <div class="col-xs-8">
-          <a href="forgot-password.php">I forgot my password</a>
-        </div>
-        <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Réinitialiser</button>
         </div>
-        <!-- /.col -->
       </div>
     </form>
 
-    <br>
-
     <?php 
-    //If User have successfully registered then show them this success message
-    //Todo: Remove Success Message without reload?
-    if(isset($_SESSION['registerCompleted'])) {
+    //If there is any message to show
+    if(isset($_SESSION['resetPasswordMessage'])) {
       ?>
       <div>
-        <p id="successMessage" class="text-center">Check your email!</p>
+        <p class="text-center"><?php echo $_SESSION['resetPasswordMessage']; ?></p>
       </div>
     <?php
-     unset($_SESSION['registerCompleted']); }
-    ?>   
-    <?php 
-    //If User Failed To log in then show error message.
-    if(isset($_SESSION['loginError'])) {
-      ?>
-      <div>
-        <p class="text-center">Invalid Email/Password! Try Again!</p>
-      </div>
-    <?php
-     unset($_SESSION['loginError']); }
-    ?>      
-
-    <?php 
-    //If User Failed To log in then show error message.
-    if(isset($_SESSION['userActivated'])) {
-      ?>
-      <div>
-        <p class="text-center">Your Account Is Active. You Can Login</p>
-      </div>
-    <?php
-     unset($_SESSION['userActivated']); }
-    ?>    
-
-     <?php 
-    //If User Failed To log in then show error message.
-    if(isset($_SESSION['loginActiveError'])) {
-      ?>
-      <div>
-        <p class="text-center"><?php echo $_SESSION['loginActiveError']; ?></p>
-      </div>
-    <?php
-     unset($_SESSION['loginActiveError']); }
+     unset($_SESSION['resetPasswordMessage']); }
     ?>   
 
   </div>
@@ -133,10 +89,5 @@ if(isset($_SESSION['id_user']) || isset($_SESSION['id_company'])) {
     });
   });
 </script>
-<script type="text/javascript">
-      $(function() {
-        $("#successMessage:visible").fadeOut(8000);
-      });
-    </script>
 </body>
 </html>

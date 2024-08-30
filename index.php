@@ -107,6 +107,7 @@ require_once("db.php");
             <h1>All <strong>JOBS</strong> In One Place</h1>
             <p>One search, global reach</p>
             <p><a class="btn btn-success btn-lg" href="jobs.php" role="button">Search Jobs</a></p>
+            <p><a class="btn btn-success btn-lg" href="chat/index.php" role="button">Chat center</a></p>
           </div>
         </div>
       </div>
@@ -137,7 +138,7 @@ require_once("db.php");
             <div class="attachment-block clearfix">
               <img class="attachment-img" src="img/photo1.png" alt="Attachment Image">
               <div class="attachment-pushed">
-                <h4 class="attachment-heading"><a href="view-job-post.php?id=<?php echo $row['id_jobpost']; ?>"><?php echo $row['jobtitle']; ?></a> <span class="attachment-heading pull-right">$<?php echo $row['maximumsalary']; ?>/Month</span></h4>
+                <h4 class="attachment-heading"><a href="view-job-post.php?id=<?php echo $row['id_jobpost']; ?>"><?php echo $row['jobtitle']; ?></a> <span class="attachment-heading pull-right">CFA <?php echo $row['maximumsalary']; ?>/Month</span></h4>
                 <div class="attachment-text">
                     <div><strong><?php echo $row1['companyname']; ?> | <?php echo $row1['city']; ?> | Experience <?php echo $row['experience']; ?> Years</strong></div>
                 </div>
